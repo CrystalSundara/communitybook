@@ -26,9 +26,9 @@
       <h6 class="interactive">Wishlist books available</h6>
     </div>
 
-    <div class="row">
-      <div class="card-deck">
-        <div v-for="boo in book" v-bind:key="boo" class="col-6 col-sm-4">
+    <div class="card-deck">
+      <div class="row">
+        <div v-for="boo in book" v-bind:key="boo" class="col-6 col-md-4">
           <div class="card mb-3">
           <div class="card-header text-center">
             <img class="card-img-top" :src="'../static/img/' + boo.photo" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
