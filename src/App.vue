@@ -15,7 +15,7 @@
   </nav>
   <hr />
   <div class="container">
-    <div class="input-group input-group-sm mb-3" style="width: 90%; margin:auto;">
+    <div class="input-group input-group-sm mb-3 col-12 col-md-6" style="margin:auto;">
       <div class="input-group-prepend">
         <button class="btn-link" type="submit"><i class="text-secondary typcn typcn-zoom"></i></button>
       </div>
@@ -28,8 +28,8 @@
 
     <div class="card-deck">
       <div class="row">
-        <div v-for="boo in book" v-bind:key="boo" class="col-6">
-          <div class="card">
+        <div v-for="boo in book" v-bind:key="boo" class="col-6 col-sm-4">
+          <div class="card mb-3">
           <div class="card-header text-center">
             <img class="card-img-top" :src="'../static/img/' + boo.photo" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
           </div>
@@ -60,7 +60,7 @@
 
     <div class="card-deck">
       <div class="row">
-        <div v-for="boo in book" v-bind:key="boo" class="col-12">
+        <div v-for="boo in book" v-bind:key="boo" class="col-12 col-sm-9 col-md-6 col-xl-5">
           <div class="card text-left mb-3">
             <div class="row no-gutters">
               <div class="col-4">
