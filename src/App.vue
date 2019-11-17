@@ -26,8 +26,8 @@
       <h6 class="interactive">Wishlist books available</h6>
     </div>
 
-    <div class="card-deck">
-      <div class="row">
+    <div class="row">
+      <div class="card-deck">
         <div v-for="boo in book" v-bind:key="boo" class="col-6 col-sm-4">
           <div class="card mb-3">
           <div class="card-header text-center">
