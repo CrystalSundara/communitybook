@@ -122,11 +122,12 @@
           <p>{{ boo.author }}</p>
         </div>
       </div> -->
+    <router-link to="/">Landing page</router-link>
     <div style="margin: 0 0 80px 0;">
     </div>
 
     <nav class="nav nav-pills nav-justified fixed-bottom small">
-      <router-link to="/" class="nav-item nav-link active" href="#"><i class="text-primary typcn typcn-home-outline" style="font-size: 1.3rem;"></i><br />Home</router-link>
+      <router-link to="/home" class="nav-item nav-link active" href="#"><i class="text-primary typcn typcn-home-outline" style="font-size: 1.3rem;"></i><br />Home</router-link>
       <router-link to="/search" class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-zoom" style="font-size: 1.3rem;"></i><br />Search</router-link>
       <a class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-book" style="font-size: 1.3rem;"></i><br />My books</a>
       <a class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-th-list" style="font-size: 1.3rem;"></i><br />Wishlist</a>
