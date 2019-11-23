@@ -19,7 +19,7 @@
       <div class="input-group-prepend">
         <button class="btn-link" type="submit"><i class="text-secondary typcn typcn-zoom"></i></button>
       </div>
-      <input type="text" class="form-control" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
+      <input type="text" class="form-control" v-model="search" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
     </div>
 
     <div>
@@ -27,21 +27,21 @@
     </div>
 
     <div class="card-deck">
-      <div class="row">
-        <div v-for="boo in book" v-bind:key="boo" class="col-12 col-sm-9 col-md-6 col-xl-5">
-          <div class="card text-left mb-3">
+      <!-- <div class="row"> -->
+        <div v-for="boo in filteredBooks" v-bind:key="boo" class="col-12 col-sm-9 col-md-6 col-xl-5">
+          <div class="card text-left mb-3 mr-1">
             <div class="row no-gutters">
               <div class="col-4">
                 <img :src="'../static/img/' + boo.photo" class="card-img" style="max-height: 150px; width: auto;" alt="...">
               </div>
               <div class="col-8">
-                <div class="card-body d-flex flex-column ml-2" style="height: 150px;">
+                <div class="card-body d-flex flex-column ml-3" style="height: 150px;">
                   <h6 class="card-title">{{ boo.title }}
                   <br />{{ boo.edition }}</h6>
                   <p class="small card-subtitle mb-2 text-secondary">{{ boo.author }}</p>
                   <p class="small card-subtitle mb-2 text-secondary">{{ boo.isbn }}</p>
                   <div class="mt-auto">
-                  <a href="#" class="card-link interactive mr-3 small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>Wishlist</a>
+                  <a href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>Wishlist</a>
                   <a href="#" class="card-link interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>My books</a>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
             </div>
           </div>
         </div> -->
-      </div>
+      <!-- </div> -->
     </div>
       <!-- <div class="container">
         <h1>Hello! Nice to meet you!</h1>
@@ -113,11 +113,19 @@ export default {
   name: 'Search',
   data () {
     return {
-      book: []
+      book: [],
+      search: ''
     }
   },
   firebase: {
     book: db.ref('book')
+  },
+  computed: {
+    filteredBooks: function () {
+      return this.book.filter((boo) => {
+        return boo.title.toLowerCase().match(this.search.toLowerCase())
+      })
+    }
   }
 }
 
