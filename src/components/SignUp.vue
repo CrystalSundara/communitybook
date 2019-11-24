@@ -7,8 +7,6 @@
         </div>
         <form @submit="upload" class="col-12 col-md-6 col-xl-4 align-self-center">
         <div class="form-group">
-            <img class="img-thumbnail mb-1" :src='this.downloadUrl' style="height: 80px; width: auto">
-            <br />
             <label for="profilePhoto" class="text-light textshadow">Upload photo</label>
             <input type="file" v-bind="imageName" id="profilePhoto" @change="onFilePicked">
         </div>
@@ -38,7 +36,7 @@
           <label for="gradeLevel" class="text-light textshadow">Grade level</label>
            <select class="form-control" v-model="newUser.gradeLevel" id="gradeLevel">
             <option>Freshman</option>
-            <option>Sophomroe</option>
+            <option>Sophomore</option>
             <option>Junior</option>
             <option>Senior</option>
             <option>Grad student</option>
@@ -54,7 +52,7 @@
             <option>Psychology</option>
           </select>
         </div>
-        <div class="text-center">
+        <div class="text-center mb-5">
         <router-link to="/"><button type="cancel" class="btn btn-secondary">Cancel</button></router-link>
         <button type="next" class="btn btn-primary mr-4">Next</button>
         </div>
