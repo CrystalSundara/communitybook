@@ -19,27 +19,28 @@
       <div class="input-group-prepend">
         <button class="btn-link" type="submit"><i class="text-secondary typcn typcn-zoom"></i></button>
       </div>
-      <input type="text" class="form-control" v-model="search" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
+      <input type="text" class="form-control" v-model="searchTerm" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
     </div>
 
     <div>
-      <h6 class="interactive">Search results</h6>
+      <h5 class="text-primary mt-3 ml-3">Search results</h5>
+      <p class="text-secondary mb-5 ml-3">Book not listed?<router-link to="/addBook" class="interactive pl-3 py-0">Add book ></router-link></p>
     </div>
 
     <div class="card-deck">
       <!-- <div class="row"> -->
-        <div v-for="boo in filteredBooks" v-bind:key="boo" class="col-12 col-sm-9 col-md-6 col-xl-5">
+        <div v-for="book in filteredBooks" v-bind:key="book" class="col-12 col-sm-9 col-md-6 col-xl-5">
           <div class="card text-left mb-3 mr-1">
             <div class="row no-gutters">
               <div class="col-4">
-                <img :src="'../static/img/' + boo.photo" class="card-img" style="max-height: 150px; width: auto;" alt="...">
+                <img :src="book.downloadUrl" class="card-img" style="max-height: 150px; width: auto;" alt="...">
               </div>
               <div class="col-8">
                 <div class="card-body d-flex flex-column ml-3" style="height: 150px;">
-                  <h6 class="card-title">{{ boo.title }}
-                  <br />{{ boo.edition }}</h6>
-                  <p class="small card-subtitle mb-2 text-secondary">{{ boo.author }}</p>
-                  <p class="small card-subtitle mb-2 text-secondary">{{ boo.isbn }}</p>
+                  <h6 class="card-title">{{ book.title }}
+                  <br />{{ book.edition }} edition</h6>
+                  <p class="small card-subtitle mb-2 text-secondary">{{ book.author }}</p>
+                  <p class="small card-subtitle mb-2 text-secondary">{{ book.isbn }}</p>
                   <div class="mt-auto">
                   <a href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>Wishlist</a>
                   <a href="#" class="card-link interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>My books</a>
@@ -49,47 +50,8 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-12">
-          <div class="card text-left mb-3">
-            <div class="row no-gutters">
-              <div class="col-4">
-                <img src="../img/pandas.jpg" class="card-img" style="max-height: 150px; width: auto;" alt="...">
-              </div>
-              <div class="col-8">
-                <div class="card-body">
-                  <h6 class="card-title">Pandas for Everyone</h6>
-                  <h6 class="card-title">Edition</h6>
-                  <p class="small card-subtitle mb-2 text-secondary">Author</p>
-                  <p class="small card-subtitle mb-2 text-secondary">ISBN</p>
-                  <a href="#" class="card-link interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>Wishlist</a>
-                  <a href="#" class="card-link interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>My books</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       <!-- </div> -->
     </div>
-      <!-- <div class="container">
-        <h1>Hello! Nice to meet you!</h1>
-      </div>
-      <div v-for="message in messages" v-bind:key="message">
-        <div class="container">
-          <h4>{{ message.title }}</h4>
-          <hr />
-          <p>{{ message.text }}</p>
-          <p>{{ message.timestamp }}</p>
-        </div>
-      </div> -->
-
-      <!-- <div v-for="boo in book" v-bind:key="boo">
-        <div class="container">
-          <h4>{{ boo.title }}</h4>
-          <hr />
-          <p>{{ boo.edition }}</p>
-          <p>{{ boo.author }}</p>
-        </div>
-      </div> -->
 
     <div style="margin: 0 0 80px 0;">
     </div>
@@ -107,23 +69,33 @@
 </template>
 
 <script>
-import { db } from '../db'
+
+import { fstore } from '../db'
 
 export default {
-  name: 'Search',
+  name: 'search',
   data () {
     return {
-      book: [],
-      search: ''
+      searchTerm: '',
+      books: []
     }
   },
-  firebase: {
-    book: db.ref('book')
+  firestore () {
+    return {
+      books: fstore.collection('Books')
+    }
   },
   computed: {
-    filteredBooks: function () {
-      return this.book.filter((boo) => {
-        return boo.title.toLowerCase().match(this.search.toLowerCase())
+    filteredBooks () {
+      // return this.books.filter((book) => {
+      //   return book.title.toLowerCase().match(this.search.toLowerCase())
+      // })
+      return this.books.filter(book => {
+        let title = book.title.toLowerCase()
+        let author = book.author.toLowerCase()
+        let isbn = book.isbn.toLowerCase()
+        let term = this.searchTerm.toLowerCase()
+        return title.indexOf(term) >= 0 || author.indexOf(term) >= 0 || isbn.indexOf(term) >= 0
       })
     }
   }

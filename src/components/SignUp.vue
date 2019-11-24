@@ -8,7 +8,7 @@
         <form @submit="upload" class="col-12 col-md-6 col-xl-4 align-self-center">
         <div class="form-group">
             <label for="profilePhoto" class="text-light textshadow">Upload photo</label>
-            <input type="file" v-bind="imageName" id="profilePhoto" @change="onFilePicked">
+            <input type="file" class="form-control-file text-light" v-bind="imageName" id="profilePhoto" @change="onFilePicked">
         </div>
         <div class="form-group">
             <label for="email" class="text-light textshadow">Email</label>
@@ -52,9 +52,9 @@
             <option>Psychology</option>
           </select>
         </div>
-        <div class="text-center mb-5">
+        <div class="mb-5">
+        <button type="next" class="btn btn-primary mr-4">Sign up</button>
         <router-link to="/"><button type="cancel" class="btn btn-secondary">Cancel</button></router-link>
-        <button type="next" class="btn btn-primary mr-4">Next</button>
         </div>
         </form>
     </div>
@@ -67,6 +67,7 @@ import { fstore, storageRef } from '../db'
 import router from '../router'
 
 export default {
+  name: 'signUp',
   data () {
     return {
       photo: null,
