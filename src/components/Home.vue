@@ -45,31 +45,27 @@
       </div>
     </div>
 
+    <div>
+      <h6 class="text-primary mt-4">Computer Science books</h6>
+    </div>
+
     <div class="card-deck">
       <!-- <div class="row"> -->
-        <div v-for="book in books" v-bind:key="book" class="col-12 col-sm-9 col-md-6 col-xl-4">
-          <div class="card text-left mb-3">
-            <div class="row no-gutters">
-              <div class="col-4">
-                <img :src="book.downloadUrl" class="card-img" style="max-height: 150px; width: auto;" alt="...">
-              </div>
-              <div class="col-8">
-                <div class="card-body d-flex flex-column ml-3" style="height: 150px;">
-                  <h6 class="card-title">{{ book.title }}
-                  <br />{{ book.edition }} edition</h6>
-                  <p class="small card-subtitle mb-2 text-secondary">{{ book.author }}</p>
-                  <p class="small card-subtitle mb-2 text-secondary">{{ book.isbn }}</p>
-                  <div class="mt-auto">
-                  <a href="#" class="card-link interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>Wishlist</a>
-                  <a href="#" class="card-link text-right interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>My books</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div v-for="book in subjectBooks" v-bind:key="book" class="col-6 col-md-4">
+          <div class="card mb-3">
+          <div class="card-header text-center">
+            <img class="card-img-top" :src="book.downloadUrl" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
           </div>
-        </div>
+          <div class="card-body">
+            <h6 class="card-title">{{ book.title }}</h6>
+            <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
+            <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
+            <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+          </div>
+        <!-- </div> -->
 
-      <!-- </div> -->
+      </div>
     </div>
 
     <router-link to="/">Landing page</router-link>
@@ -101,6 +97,18 @@ export default {
   firestore () {
     return {
       books: fstore.collection('Books')
+    }
+  },
+  computed: {
+    subjectBooks () {
+      // return this.books.filter((book) => {
+      //   return book.title.toLowerCase().match(this.search.toLowerCase())
+      // })
+      return this.books.filter(book => {
+        let subject = book.subject.toLowerCase()
+        let subjectTerm = 'Computer Science'.toLowerCase()
+        return subject.indexOf(subjectTerm) >= 0
+      })
     }
   }
 }
