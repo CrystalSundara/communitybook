@@ -3,11 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { rtdbPlugin as VueFire } from 'vuefire'
+import { rtdbPlugin as VueFire, firestorePlugin } from 'vuefire'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '../css/bootstrap-themed.css'
+import 'firebase/firestore'
+
+Vue.use(firestorePlugin)
 
 Vue.use(BootstrapVue)
 Vue.use(VueFire)

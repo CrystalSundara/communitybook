@@ -5,6 +5,7 @@ import Search from '@/components/Search'
 import Landing from '@/components/Landing'
 import SignIn from '@/components/SignIn'
 import SignUp from '@/components/SignUp'
+import UploadTest from '@/components/UploadTest'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/signup',
       name: 'signup',
       component: SignUp
+    },
+    {
+      path: '/uploadTest',
+      name: 'uploadTest',
+      component: UploadTest
     }
   ]
 })
