@@ -26,47 +26,45 @@
       <h6 class="interactive">Wishlist books available</h6>
     </div>
 
-    <div class="card-deck">
-      <!-- <div class="row"> -->
+      <div class="row">
         <div v-for="book in wishlistBooks" v-bind:key="book" class="col-6 col-md-4">
-          <div class="card mb-3">
-          <div class="card-header text-center">
-            <img class="card-img-top" :src="book.downloadUrl" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
+          <div class="card-deck">
+            <div class="card mb-3">
+              <div class="card-header text-center">
+                <img class="card-img-top" :src="book.downloadUrl" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">{{ book.title }}</h6>
+                <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
+                <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
+                <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <h6 class="card-title">{{ book.title }}</h6>
-            <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
-            <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
-            <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
-          </div>
-        <!-- </div> -->
-
+        </div>
       </div>
-    </div>
 
     <div>
       <h6 class="text-primary mt-4">Computer Science books</h6>
     </div>
 
-    <div class="card-deck">
-      <!-- <div class="row"> -->
+      <div class="row">
         <div v-for="book in subjectBooks" v-bind:key="book" class="col-6 col-md-4">
-          <div class="card mb-3">
-          <div class="card-header text-center">
-            <img class="card-img-top" :src="book.downloadUrl" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
+          <div class="card-deck">
+            <div class="card mb-3">
+              <div class="card-header text-center">
+                <img class="card-img-top" :src="book.downloadUrl" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">{{ book.title }}</h6>
+                <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
+                <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
+                <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <h6 class="card-title">{{ book.title }}</h6>
-            <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
-            <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
-            <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
-          </div>
-        <!-- </div> -->
-
+        </div>
       </div>
-    </div>
 
     <router-link to="/">Landing page</router-link>
     <div style="margin: 0 0 80px 0;">
