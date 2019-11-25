@@ -28,7 +28,7 @@
 
     <div class="card-deck">
       <!-- <div class="row"> -->
-        <div v-for="book in books" v-bind:key="book" class="col-6 col-md-4">
+        <div v-for="book in wishlistBooks" v-bind:key="book" class="col-6 col-md-4">
           <div class="card mb-3">
           <div class="card-header text-center">
             <img class="card-img-top" :src="book.downloadUrl" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
@@ -100,6 +100,16 @@ export default {
     }
   },
   computed: {
+    wishlistBooks () {
+      // return this.books.filter((book) => {
+      //   return book.title.toLowerCase().match(this.search.toLowerCase())
+      // })
+      return this.books.filter(book => {
+        let listType = book.listType.toLowerCase()
+        let matchTerm = 'Wishlist'.toLowerCase()
+        return listType.indexOf(matchTerm) >= 0
+      })
+    },
     subjectBooks () {
       // return this.books.filter((book) => {
       //   return book.title.toLowerCase().match(this.search.toLowerCase())

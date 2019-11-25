@@ -51,7 +51,21 @@
             <option>Psychology</option>
           </select>
         </div>
-        <div class="my-4">
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" v-model="newBook.listType" id="wishlistRadio" value="Wishlist">
+                <label class="form-check-label text-primary" for="wishlistRadio">
+                    Add to wishlist
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" v-model="newBook.listType" id="myBooksRadio" value="MyBooks">
+                <label class="form-check-label text-primary" for="myBooksRadio">
+                    Add to my books
+                </label>
+            </div>
+            <div class="my-4">
+        </div>
         <button type="submit" class="btn btn-primary mr-4">Submit</button>
         <router-link to="/"><button type="cancel" class="btn btn-secondary">Cancel</button></router-link>
         </div>
@@ -92,7 +106,8 @@ export default {
         author: '',
         edition: '',
         isbn: '',
-        subject: ''
+        subject: '',
+        listType: ''
       }
     }
   },
@@ -125,6 +140,7 @@ export default {
       var edition = this.newBook.edition
       var isbn = this.newBook.isbn
       var subject = this.newBook.subject
+      var listType = this.newBook.listType
       mountainsRef.put(this.imageFile).then(snapshot => {
         snapshot.ref.getDownloadURL().then(downloadURL => {
           this.imageUrl = downloadURL
@@ -141,6 +157,7 @@ export default {
             edition,
             isbn,
             subject,
+            listType,
             timestamp: Date.now()
           })
         })
