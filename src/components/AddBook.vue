@@ -67,7 +67,7 @@
             <div class="my-4">
         </div>
         <button type="submit" class="btn btn-primary mr-4">Submit</button>
-        <router-link to="/"><button type="cancel" class="btn btn-secondary">Cancel</button></router-link>
+        <router-link to="/search"><button type="cancel" class="btn btn-secondary">Cancel</button></router-link>
         </div>
         </form>
 
