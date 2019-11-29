@@ -1,5 +1,5 @@
 <template>
-<div id="home">
+<div id="wishlist">
 
   <nav class="navbar navbar-light">
       <button class="navbar-toggler"
@@ -22,58 +22,41 @@
       <input type="text" v-model="searchMsg" @keyup.enter="submit" class="form-control" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
     </div>
 
-    <div>
-      <h6 class="interactive">Wishlist books available</h6>
+    <div class="row my-3">
+      <h5 class="text-primary ml-4">Wishlist</h5>
+      <router-link to="/addBook" class="btn btn-primary btn-sm my-auto ml-auto mr-3">Add book</router-link>
     </div>
 
-      <div class="row">
-        <div v-for="book in wishlistBooks" v-bind:key="book" class="col-6 col-md-4">
-          <div class="card-deck">
-            <div class="card mb-3">
-              <div class="card-header text-center">
-                <img class="card-img-top" :src="book.downloadUrl" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
+    <div class="card-deck mt-2">
+        <div v-for="book in wishlistBooks" v-bind:key="book" class="col-12 col-sm-9 col-md-6 col-xl-5">
+          <div class="card text-left mb-3 mr-1">
+            <div class="row no-gutters">
+              <div class="col-4">
+                <img :src="book.downloadUrl" class="card-img" style="max-height: 150px; width: auto;" alt="...">
               </div>
-              <div class="card-body">
-                <h6 class="card-title">{{ book.title }}</h6>
-                <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
-                <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
-                <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <div class="col-8">
+                <div class="card-body d-flex flex-column ml-3" style="height: 150px;">
+                  <h6 class="card-title">{{ book.title }}
+                  <br />{{ book.edition }} edition</h6>
+                  <p class="small card-subtitle mb-2 text-secondary">{{ book.author }}</p>
+                  <p class="small card-subtitle mb-2 text-secondary">{{ book.isbn }}</p>
+                  <div class="mt-auto">
+                  <a href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-minus" style="font-size: 1rem;"></i>Wishlist</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-    <div>
-      <h6 class="text-primary mt-4">Computer Science books</h6>
     </div>
 
-      <div class="row">
-        <div v-for="book in subjectBooks" v-bind:key="book" class="col-6 col-md-4">
-          <div class="card-deck">
-            <div class="card mb-3">
-              <div class="card-header text-center">
-                <img class="card-img-top" :src="book.downloadUrl" style="max-height: 150px; width: auto; margin: auto;" alt="Card image cap">
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">{{ book.title }}</h6>
-                <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
-                <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
-                <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    <router-link to="/" class="mt-5">Go back to landing page</router-link>
     <div style="margin: 0 0 80px 0;">
     </div>
     <nav class="nav nav-pills nav-justified fixed-bottom small">
-      <router-link to="/home" class="nav-item nav-link active" href="#"><i class="text-primary typcn typcn-home-outline" style="font-size: 1.3rem;"></i><br />Home</router-link>
+      <router-link to="/home" class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-home-outline" style="font-size: 1.3rem;"></i><br />Home</router-link>
       <router-link to="/search/ " class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-zoom" style="font-size: 1.3rem;"></i><br />Search</router-link>
       <router-link to="/mybooks" class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-book" style="font-size: 1.3rem;"></i><br />My books</router-link>
-      <router-link to="/wishlist" class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-th-list" style="font-size: 1.3rem;"></i><br />Wishlist</router-link>
+      <router-link to="/wishlist" class="nav-item nav-link active" href="#"><i class="text-primary typcn typcn-th-list" style="font-size: 1.3rem;"></i><br />Wishlist</router-link>
       <a class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-messages" style="font-size: 1.3rem;"></i><br />Forum</a>
     </nav>
 
@@ -87,7 +70,7 @@ import { fstore } from '../db'
 import router from '../router'
 
 export default {
-  name: 'home',
+  name: 'wishlist',
   data () {
     return {
       books: []
@@ -117,16 +100,6 @@ export default {
         let listType = book.listType.toLowerCase()
         let matchTerm = 'Wishlist'.toLowerCase()
         return listType.indexOf(matchTerm) >= 0
-      })
-    },
-    subjectBooks () {
-      // return this.books.filter((book) => {
-      //   return book.title.toLowerCase().match(this.search.toLowerCase())
-      // })
-      return this.books.filter(book => {
-        let subject = book.subject.toLowerCase()
-        let subjectTerm = 'Computer Science'.toLowerCase()
-        return subject.indexOf(subjectTerm) >= 0
       })
     }
   }

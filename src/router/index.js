@@ -6,6 +6,8 @@ import Landing from '@/components/Landing'
 import SignIn from '@/components/SignIn'
 import SignUp from '@/components/SignUp'
 import AddBook from '@/components/AddBook'
+import MyBooks from '@/components/MyBooks'
+import Wishlist from '@/components/Wishlist'
 
 Vue.use(VueRouter)
 
@@ -41,6 +43,16 @@ export default new VueRouter({
       path: '/addBook',
       name: 'addBook',
       component: AddBook
+    },
+    {
+      path: '/mybooks',
+      name: 'mybooks',
+      component: MyBooks
+    },
+    {
+      path: '/wishlist',
+      name: 'wishlist',
+      component: Wishlist
     }
   ]
 })

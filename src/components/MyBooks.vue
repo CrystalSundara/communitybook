@@ -1,5 +1,5 @@
 <template>
-<div id="search">
+<div id="mybooks">
 
   <nav class="navbar navbar-light">
       <button class="navbar-toggler"
@@ -14,21 +14,21 @@
       <a href="#" style="margin:auto; text-align:center; padding: 10px 0 0 0;"><h4>Community Book</h4></a>
   </nav>
   <hr />
-  <div class="container">
+  <div class="container d-flex flex-column">
     <div class="input-group input-group-sm mb-3 col-12 col-md-6" style="margin:auto;">
       <div class="input-group-prepend">
-        <button class="btn-link" type="submit"><i class="text-secondary typcn typcn-zoom"></i></button>
+        <router-link to="/search/ "><button v-on:click="submit" class="btn-link pb-1"><i class="text-secondary typcn typcn-zoom"></i></button></router-link>
       </div>
-      <input type="text" class="form-control" v-model="searchTerm" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
+      <input type="text" v-model="searchMsg" @keyup.enter="submit" class="form-control" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
     </div>
 
-    <div>
-      <h5 class="text-primary mt-4 ml-3">Search results</h5>
-      <p class="text-secondary mb-5 ml-3">Book not listed?<router-link to="/addBook" class="interactive pl-3 py-0">Add book ></router-link></p>
+    <div class="row my-3">
+      <h5 class="text-primary ml-4">My books</h5>
+      <router-link to="/addBook" class="btn btn-primary btn-sm my-auto ml-auto mr-3">Add book</router-link>
     </div>
 
-    <div class="card-deck">
-        <div v-for="book in filteredBooks" v-bind:key="book" class="col-12 col-sm-9 col-md-6 col-xl-5">
+    <div class="card-deck mt-3">
+        <div v-for="book in getMyBooks" v-bind:key="book" class="col-12 col-sm-9 col-md-6 col-xl-5">
           <div class="card text-left mb-3 mr-1">
             <div class="row no-gutters">
               <div class="col-4">
@@ -41,8 +41,7 @@
                   <p class="small card-subtitle mb-2 text-secondary">{{ book.author }}</p>
                   <p class="small card-subtitle mb-2 text-secondary">{{ book.isbn }}</p>
                   <div class="mt-auto">
-                  <a href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>Wishlist</a>
-                  <a href="#" class="card-link interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>My books</a>
+                  <a href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-minus" style="font-size: 1rem;"></i>My books</a>
                   </div>
                 </div>
               </div>
@@ -53,11 +52,10 @@
 
     <div style="margin: 0 0 80px 0;">
     </div>
-
     <nav class="nav nav-pills nav-justified fixed-bottom small">
       <router-link to="/home" class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-home-outline" style="font-size: 1.3rem;"></i><br />Home</router-link>
-      <router-link to="/search" class="nav-item nav-link active" href="#"><i class="text-primary typcn typcn-zoom" style="font-size: 1.3rem;"></i><br />Search</router-link>
-      <router-link to="/mybooks" class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-book" style="font-size: 1.3rem;"></i><br />My books</router-link>
+      <router-link to="/search/ " class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-zoom" style="font-size: 1.3rem;"></i><br />Search</router-link>
+      <router-link to="/mybooks" class="nav-item nav-link active" href="#"><i class="text-primary typcn typcn-book" style="font-size: 1.3rem;"></i><br />My books</router-link>
       <router-link to="/wishlist" class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-th-list" style="font-size: 1.3rem;"></i><br />Wishlist</router-link>
       <a class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-messages" style="font-size: 1.3rem;"></i><br />Forum</a>
     </nav>
@@ -67,18 +65,14 @@
 </template>
 
 <script>
+
 import { fstore } from '../db'
+import router from '../router'
+
 export default {
-  name: 'search',
-  props: {
-    searchMsg: {
-      type: String,
-      default: ''
-    }
-  },
+  name: 'mybooks',
   data () {
     return {
-      searchTerm: '',
       books: []
     }
   },
@@ -87,24 +81,28 @@ export default {
       books: fstore.collection('Books')
     }
   },
-  created () {
-    if (this.searchMsg !== ' ') {
-      this.searchTerm = this.searchMsg
+  methods: {
+    submit: function () {
+      // this.$emit('inputData', this.searchMessage)
+      // this.searchMessage = ''
+      if (this.searchMsg == null) {
+        this.searchMsg = ''
+      }
+      router.push('/search/' + this.searchMsg)
     }
   },
   computed: {
-    filteredBooks () {
+    getMyBooks () {
       // return this.books.filter((book) => {
       //   return book.title.toLowerCase().match(this.search.toLowerCase())
       // })
       return this.books.filter(book => {
-        let title = book.title.toLowerCase()
-        let author = book.author.toLowerCase()
-        let isbn = book.isbn.toLowerCase()
-        let term = this.searchTerm.toLowerCase()
-        return title.indexOf(term) >= 0 || author.indexOf(term) >= 0 || isbn.indexOf(term) >= 0
+        let listType = book.listType.toLowerCase()
+        let matchTerm = 'MyBooks'.toLowerCase()
+        return listType.indexOf(matchTerm) >= 0
       })
     }
   }
 }
+
 </script>
