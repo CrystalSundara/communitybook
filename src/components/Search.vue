@@ -28,7 +28,6 @@
     </div>
 
     <div class="card-deck">
-      <!-- <div class="row"> -->
         <div v-for="book in filteredBooks" v-bind:key="book" class="col-12 col-sm-9 col-md-6 col-xl-5">
           <div class="card text-left mb-3 mr-1">
             <div class="row no-gutters">
@@ -50,7 +49,6 @@
             </div>
           </div>
         </div>
-      <!-- </div> -->
     </div>
 
     <div style="margin: 0 0 80px 0;">
@@ -69,11 +67,15 @@
 </template>
 
 <script>
-
 import { fstore } from '../db'
-
 export default {
   name: 'search',
+  props: {
+    searchMsg: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
       searchTerm: '',
@@ -83,6 +85,11 @@ export default {
   firestore () {
     return {
       books: fstore.collection('Books')
+    }
+  },
+  created () {
+    if (this.searchMsg !== ' ') {
+      this.searchTerm = this.searchMsg
     }
   },
   computed: {
@@ -100,5 +107,4 @@ export default {
     }
   }
 }
-
 </script>

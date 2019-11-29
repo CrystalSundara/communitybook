@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import Home from '@/components/Home'
 import Search from '@/components/Search'
 import Landing from '@/components/Landing'
@@ -7,9 +7,9 @@ import SignIn from '@/components/SignIn'
 import SignUp from '@/components/SignUp'
 import AddBook from '@/components/AddBook'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
+export default new VueRouter({
   routes: [
     {
       path: '/',
@@ -22,9 +22,10 @@ export default new Router({
       component: Home
     },
     {
-      path: '/search',
+      path: '/search/:searchMsg',
       name: 'search',
-      component: Search
+      component: Search,
+      props: true
     },
     {
       path: '/signin',

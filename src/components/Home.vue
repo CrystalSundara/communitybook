@@ -17,9 +17,9 @@
   <div class="container d-flex flex-column">
     <div class="input-group input-group-sm mb-3 col-12 col-md-6" style="margin:auto;">
       <div class="input-group-prepend">
-        <button class="btn-link" type="submit"><i class="text-secondary typcn typcn-zoom"></i></button>
+        <router-link to="/search/ "><button v-on:click="submit" class="btn-link pb-1"><i class="text-secondary typcn typcn-zoom"></i></button></router-link>
       </div>
-      <input type="text" class="form-control" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
+      <input type="text" v-model="searchMsg" @keyup.enter="submit" class="form-control" placeholder="Search Community Book" aria-label="Search" aria-describedby="inputGroup-sizing-sm">
     </div>
 
     <div>
@@ -66,12 +66,12 @@
         </div>
       </div>
 
-    <router-link to="/">Landing page</router-link>
+    <router-link to="/" class="mt-5">Go back to landing page</router-link>
     <div style="margin: 0 0 80px 0;">
     </div>
     <nav class="nav nav-pills nav-justified fixed-bottom small">
       <router-link to="/home" class="nav-item nav-link active" href="#"><i class="text-primary typcn typcn-home-outline" style="font-size: 1.3rem;"></i><br />Home</router-link>
-      <router-link to="/search" class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-zoom" style="font-size: 1.3rem;"></i><br />Search</router-link>
+      <router-link to="/search/ " class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-zoom" style="font-size: 1.3rem;"></i><br />Search</router-link>
       <a class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-book" style="font-size: 1.3rem;"></i><br />My books</a>
       <a class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-th-list" style="font-size: 1.3rem;"></i><br />Wishlist</a>
       <a class="nav-item nav-link" href="#"><i class="text-primary typcn typcn-messages" style="font-size: 1.3rem;"></i><br />Forum</a>
@@ -84,6 +84,7 @@
 <script>
 
 import { fstore } from '../db'
+import router from '../router'
 
 export default {
   name: 'home',
@@ -95,6 +96,16 @@ export default {
   firestore () {
     return {
       books: fstore.collection('Books')
+    }
+  },
+  methods: {
+    submit: function () {
+      // this.$emit('inputData', this.searchMessage)
+      // this.searchMessage = ''
+      if (this.searchMsg == null) {
+        this.searchMsg = ''
+      }
+      router.push('/search/' + this.searchMsg)
     }
   },
   computed: {
