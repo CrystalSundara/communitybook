@@ -39,7 +39,7 @@
                   <h6 class="card-title">{{ book.title }}
                   <br />{{ book.edition }} edition</h6>
                   <p class="small card-subtitle mb-2 text-secondary">{{ book.author }}</p>
-                  <p class="small card-subtitle mb-2 text-secondary">{{ book.isbn }}</p>
+                  <p class="small card-subtitle text-secondary">{{ book.isbn }}</p>
                   <div class="mt-auto">
                   <a href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-minus" style="font-size: 1rem;"></i>My books</a>
                   </div>
