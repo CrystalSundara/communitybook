@@ -113,7 +113,7 @@ export default {
       var secondsPast = (now.getTime() - timeStamp.getTime()) / 1000
 
       if (secondsPast < 60) {
-        return parseInt(secondsPast) + 'secs'
+        return parseInt(secondsPast) + ' secs'
       }
       if (secondsPast < 3600) {
         return parseInt(secondsPast / 60) + ' mins'
@@ -147,28 +147,6 @@ export default {
         return subject.indexOf(subjectTerm) >= 0
       })
     }
-    // timeSince (timeStamp) {
-    //   var now = new Date()
-    //   var secondsPast = (now.getTime() - timeStamp.getTime()) / 1000
-    //   var month
-    //   var year
-
-    //   if (secondsPast < 60) {
-    //     return parseInt(secondsPast) + 's'
-    //   }
-    //   if (secondsPast < 3600) {
-    //     return parseInt(secondsPast / 60) + 'm'
-    //   }
-    //   if (secondsPast <= 86400) {
-    //     return parseInt(secondsPast / 3600) + 'h'
-    //   }
-    //   if (secondsPast > 86400) {
-    //     let day = timeStamp.getDate()
-    //     month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(' ', '')
-    //     year = timeStamp.getFullYear() === now.getFullYear() ? '' : ' ' + timeStamp.getFullYear()
-    //     return day + ' ' + month + year
-    //   }
-    // }
   }
 }
 
