@@ -41,7 +41,7 @@
                   <p class="small card-subtitle mb-2 text-secondary">{{ book.author }}</p>
                   <p class="small card-subtitle text-secondary">{{ book.isbn }}</p>
                   <div class="mt-auto">
-                  <a href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-minus" style="font-size: 1rem;"></i>Wishlist</a>
+                  <a @click="removeWishlist(book)" href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-minus" style="font-size: 1rem;"></i>Wishlist</a>
                   </div>
                 </div>
               </div>
@@ -89,6 +89,11 @@ export default {
         this.searchMsg = ''
       }
       router.push('/search/' + this.searchMsg)
+    },
+    removeWishlist: function (book) {
+      fstore.collection('Books').doc(book.id).update({
+        listType: ''
+      })
     }
   },
   computed: {

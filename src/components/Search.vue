@@ -41,8 +41,8 @@
                   <p class="small card-subtitle mb-2 text-secondary">{{ book.author }}</p>
                   <p class="small card-subtitle text-secondary">{{ book.isbn }}</p>
                   <div class="mt-auto">
-                  <a href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>Wishlist</a>
-                  <a href="#" class="card-link interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>My books</a>
+                  <a @click="addWishlist(book)" href="#" class="card-link interactive mr-2 small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>Wishlist</a>
+                  <a @click="addMyBookslist(book)" href="#" class="card-link interactive small"><i class="typcn typcn-plus" style="font-size: 1rem;"></i>My books</a>
                   </div>
                 </div>
               </div>
@@ -90,6 +90,18 @@ export default {
   created () {
     if (this.searchMsg !== ' ') {
       this.searchTerm = this.searchMsg
+    }
+  },
+  methods: {
+    addWishlist: function (book) {
+      fstore.collection('Books').doc(book.id).update({
+        listType: 'Wishlist'
+      })
+    },
+    addMyBookslist: function (book) {
+      fstore.collection('Books').doc(book.id).update({
+        listType: 'MyBooks'
+      })
     }
   },
   computed: {
