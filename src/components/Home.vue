@@ -66,8 +66,8 @@
         </div>
       </div>
 
-    <router-link to="/" class="mt-5">Go back to landing page</router-link>
-    <div style="margin: 0 0 80px 0;">
+    <!-- <router-link to="/" class="mt-5">Go back to landing page</router-link> -->
+    <div class="mt-5" style="margin: 0 0 80px 0;">
     </div>
     <nav class="nav nav-pills nav-justified fixed-bottom small">
       <router-link to="/home" class="nav-item nav-link active" href="#"><i class="text-primary typcn typcn-home-outline" style="font-size: 1.3rem;"></i><br />Home</router-link>
