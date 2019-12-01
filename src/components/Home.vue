@@ -37,7 +37,7 @@
                 <h6 class="card-title">{{ book.title }}</h6>
                 <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
                 <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
-                <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <p class="small card-text text-right"><small class="text-muted">added {{ timeSince(book.timestamp) }} ago</small></p>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
                 <h6 class="card-title">{{ book.title }}</h6>
                 <h6 class="small card-subtitle mb-2 text-secondary">{{ book.edition }} edition</h6>
                 <h6 class="small card-subtitle mb-2 text-secondary">{{ book.author }}</h6>
-                <p class="small card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <p class="small card-text text-right"><small class="text-muted">added {{ timeSince(book.timestamp) }} ago</small></p>
               </div>
             </div>
           </div>
@@ -106,6 +106,24 @@ export default {
         this.searchMsg = ''
       }
       router.push('/search/' + this.searchMsg)
+    },
+    timeSince: function (ts) {
+      var now = new Date()
+      var timeStamp = new Date(ts)
+      var secondsPast = (now.getTime() - timeStamp.getTime()) / 1000
+
+      if (secondsPast < 60) {
+        return parseInt(secondsPast) + 'secs'
+      }
+      if (secondsPast < 3600) {
+        return parseInt(secondsPast / 60) + ' mins'
+      }
+      if (secondsPast <= 86400) {
+        return parseInt(secondsPast / 3600) + ' hours'
+      }
+      if (secondsPast > 86400) {
+        return parseInt(secondsPast / 86400) + ' days'
+      }
     }
   },
   computed: {
@@ -129,6 +147,28 @@ export default {
         return subject.indexOf(subjectTerm) >= 0
       })
     }
+    // timeSince (timeStamp) {
+    //   var now = new Date()
+    //   var secondsPast = (now.getTime() - timeStamp.getTime()) / 1000
+    //   var month
+    //   var year
+
+    //   if (secondsPast < 60) {
+    //     return parseInt(secondsPast) + 's'
+    //   }
+    //   if (secondsPast < 3600) {
+    //     return parseInt(secondsPast / 60) + 'm'
+    //   }
+    //   if (secondsPast <= 86400) {
+    //     return parseInt(secondsPast / 3600) + 'h'
+    //   }
+    //   if (secondsPast > 86400) {
+    //     let day = timeStamp.getDate()
+    //     month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(' ', '')
+    //     year = timeStamp.getFullYear() === now.getFullYear() ? '' : ' ' + timeStamp.getFullYear()
+    //     return day + ' ' + month + year
+    //   }
+    // }
   }
 }
 

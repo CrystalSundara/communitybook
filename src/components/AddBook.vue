@@ -49,6 +49,7 @@
             <option>Data Science</option>
             <option>Information Technology</option>
             <option>Psychology</option>
+            <option>Other - not listed</option>
           </select>
         </div>
         <div class="form-group">
@@ -162,7 +163,7 @@ export default {
           })
         })
       })
-      router.push('/search')
+      router.push('/search/ ')
     }
   }
 }
