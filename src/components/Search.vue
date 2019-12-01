@@ -84,7 +84,7 @@ export default {
   },
   firestore () {
     return {
-      books: fstore.collection('Books')
+      books: fstore.collection('Books').orderBy('timestamp', 'desc')
     }
   },
   created () {
