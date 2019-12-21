@@ -93,7 +93,7 @@ export default {
     register: function (e) {
       firebase.auth().createUserWithEmailAndPassword(this.newUser.email, this.newUser.password)
         .then(user => {
-          alert(`Account created for ${user.email}`)
+          alert(`Account created for ` + this.newUser.email)
           var mountainsRef = storageRef.child(`users/${this.imageName}`)
           var email = this.newUser.email
           var fullName = this.newUser.fullName
