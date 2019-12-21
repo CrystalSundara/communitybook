@@ -1,14 +1,15 @@
 <template>
 <div id="search">
 
-  <b-navbar small align="right" toggleable="md" type="light">
+  <b-navbar small align="right" toggleable="lg" type="light">
     <span class="navbar-brand mb-0 h4 mx-auto">Community Book</span>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav small class="ml-auto">
-        <b-nav-item right href="#" v-on:click="logout"><i class="typcn typcn-power align-middle mr-1" style="font-size: 1.2rem;"></i>Sign out</b-nav-item>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item right class="my-auto">{{currentUser}}</b-nav-item>
+        <b-nav-item right v-on:click="logout"><i class="typcn typcn-power my-auto mr-1" style="font-size: 1.2rem;"></i>Sign out</b-nav-item>
         <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
       </b-navbar-nav>
     </b-collapse>
@@ -95,6 +96,10 @@ export default {
   created () {
     if (this.searchMsg !== ' ') {
       this.searchTerm = this.searchMsg
+    }
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true
+      this.currentUser = firebase.auth().currentUser.email
     }
   },
   methods: {
