@@ -44,7 +44,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           user => {
-            alert(`You are signed in as ${user.email}`)
+            alert(`You are signed in as ` + this.email)
             this.$router.push('/home')
           },
           err => {
