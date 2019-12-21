@@ -7,13 +7,10 @@
         </div>
         <div class="justify-content-center">
         <div class="row justify-content-center">
-            <router-link to="/signin"><button class="btn btn-primary mb-3">Sign-in</button></router-link>
+            <router-link to="/signin"><button class="btn btn-primary my-3">Sign in</button></router-link>
         </div>
         <div class="row justify-content-center">
-            <router-link to="/signup"><button class="btn btn-primary mb-3">Sign-up</button></router-link>
-        </div>
-        <div class="row justify-content-center">
-            <router-link to="/home"><button class="btn btn-primary mb-3">Continue as guest</button></router-link>
+            <router-link to="/signup"><button class="btn btn-primary mb-3">Sign up</button></router-link>
         </div>
         </div>
     </div>

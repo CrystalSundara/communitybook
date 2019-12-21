@@ -110,8 +110,10 @@ Known bugs:
 
 Instructions to install:
     The project is available publicly at https://communitybook-1.web.app/#/
-    The code is also available for redownload at https://github.com/CrystalSundara/communitybook
-    To run the project locally
-        cd to the unzipped directory (where this Readme is)
-        npm install
-        npm run dev
+    The code is also available for re-download at https://github.com/CrystalSundara/communitybook if there is a problem with the submitted version; such as if the submission process corrupts any of the files
+    To run the project locally:
+	1. Download node.js from https://nodejs.org/ if you don't have it installed already
+        2. cd to the unzipped directory (where this Readme is)
+        3. npm install
+        4. npm run dev
+        5. Open the URL from the terminal in your browser. It should be something like http://localhost:8080

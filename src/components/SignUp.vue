@@ -5,7 +5,7 @@
         <div class="row fill justify-content-center">
             <h1 class="text-light mt-5 pt-5 mb-5 pb-5">Community Book</h1>
         </div>
-        <form @submit="upload" class="col-12 col-md-6 col-xl-4 align-self-center">
+        <form @submit="register" class="col-12 col-md-6 col-xl-4 align-self-center">
         <div class="form-group">
             <label for="profilePhoto" class="text-light textshadow">Upload photo</label>
             <input type="file" class="form-control-file text-light" v-bind="imageName" id="profilePhoto" @change="onFilePicked">
@@ -64,6 +64,7 @@
 <script>
 
 import { fstore, storageRef } from '../db'
+import firebase from 'firebase'
 import router from '../router'
 
 export default {
@@ -89,6 +90,43 @@ export default {
     }
   },
   methods: {
+    register: function (e) {
+      firebase.auth().createUserWithEmailAndPassword(this.newUser.email, this.newUser.password)
+        .then(user => {
+          alert(`Account created for ${user.email}`)
+          var mountainsRef = storageRef.child(`users/${this.imageName}`)
+          var email = this.newUser.email
+          var fullName = this.newUser.fullName
+          var schoolName = this.newUser.schoolName
+          var gradeLevel = this.newUser.gradeLevel
+          var fieldOfStudy = this.newUser.fieldOfStudy
+          mountainsRef.put(this.imageFile).then(snapshot => {
+            snapshot.ref.getDownloadURL().then(downloadURL => {
+              this.imageUrl = downloadURL
+              const bucketName = 'communitybook-1.appspot.com'
+              const filePath = this.imageName
+              fstore.collection('Users').add({
+                downloadURL,
+                downloadUrl:
+                  `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/users` +
+                  '%2F' +
+                  `${encodeURIComponent(filePath)}?alt=media&token=`,
+                email,
+                fullName,
+                schoolName,
+                gradeLevel,
+                fieldOfStudy,
+                timestamp: Date.now()
+              })
+            })
+          })
+          this.$router.push('/home')
+        },
+        err => {
+          alert(err.message)
+        })
+      e.preventDefault()
+    },
     onFilePicked (e) {
       const files = e.target.files
       if (files[0] !== undefined) {

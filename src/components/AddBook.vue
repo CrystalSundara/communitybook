@@ -1,18 +1,19 @@
 <template>
 <div id="addBook">
 
-    <nav class="navbar navbar-light">
-        <button class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="#" style="margin:auto; text-align:center; padding: 10px 0 0 0;"><h4>Community Book</h4></a>
-    </nav>
+    <b-navbar small align="right" toggleable="md" type="light">
+      <span class="navbar-brand mb-0 h4 mx-auto">Community Book</span>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav small class="ml-auto">
+          <b-nav-item right href="#" v-on:click="logout"><i class="typcn typcn-power align-middle mr-1" style="font-size: 1.2rem;"></i>Sign out</b-nav-item>
+          <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
+        </b-navbar-nav>
+      </b-collapse>
+
+    </b-navbar>
     <hr />
 
     <div class="container d-flex flex-column">
@@ -89,11 +90,14 @@
 
 import { fstore, storageRef } from '../db'
 import router from '../router'
+import firebase from 'firebase'
 
 export default {
   name: 'addBook',
   data () {
     return {
+      isLoggedIn: false,
+      currentUser: false,
       photo: null,
       photo_url: null,
       dialog: false,
@@ -113,6 +117,11 @@ export default {
     }
   },
   methods: {
+    logout: function () {
+      firebase.auth().signOut().then(() => {
+        this.$router.push('/signin')
+      })
+    },
     onFilePicked (e) {
       const files = e.target.files
       if (files[0] !== undefined) {

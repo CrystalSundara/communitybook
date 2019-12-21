@@ -2911,7 +2911,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     display: none; }
 
 .navbar-light .navbar-brand {
-  color: rgba(0, 0, 0, 0.9); }
+  color: #046a38; }
   .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
     color: rgba(0, 0, 0, 0.9); }
 .navbar-light .navbar-nav .nav-link {
