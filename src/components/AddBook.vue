@@ -107,6 +107,7 @@ export default {
       imageFile: '',
       imgUrls: [],
       newBook: {
+        userEmail: '',
         bookPhotoUrl: '',
         title: '',
         author: '',
@@ -152,6 +153,7 @@ export default {
     },
     upload: function () {
       var mountainsRef = storageRef.child(`books/${this.imageName}`)
+      var userEmail = firebase.auth().currentUser.email
       var title = this.newBook.title
       var author = this.newBook.author
       var edition = this.newBook.edition
@@ -169,6 +171,7 @@ export default {
               `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/books` +
               '%2F' +
               `${encodeURIComponent(filePath)}?alt=media&token=`,
+            userEmail,
             title,
             author,
             edition,
